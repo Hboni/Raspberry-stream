@@ -24,12 +24,22 @@ class Server:
     def begin_listen(self):
 
         self.socket.listen(5)
-        client, address = self.socket.accept()
+        client, address = "", ""
+        while not client:
+            try:
+                client, address = self.socket.accept()
+            except socket.timeout:
+                pass
+
         print("{} connected".format(address))
 
         response = ""
         while not response == "fin":
-            response = client.recv(1024).decode()
+            try:
+                response = client.recv(1024).decode()
+            except socket.timeout:
+                pass
+
             if response:
                 print(response)
 
