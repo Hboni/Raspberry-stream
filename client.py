@@ -9,6 +9,8 @@ class Client:
 
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.socket.connect((self.hote, self.port))
+        #self.socket.setblocking(0)
+        self.socket.settimeout(2)
         print("Connection on {}".format(self.port))
 
     def send_message(self, message):
@@ -29,8 +31,12 @@ class Client:
         server_response = ""
         while mess != "fin":
             self.socket.send(mess.encode())
-            #server_response = self.socket.recv(1024)
-            mess = input("Which message to send to the server : \n")
+            try:
+                server_response = self.socket.recv(1024)
+            except socket.timeout:
+                pass
+            print(server_response)
+            mess = input(">>> ")
 
         self.socket.send(mess.encode())
 
