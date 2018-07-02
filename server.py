@@ -10,6 +10,7 @@ class Server:
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
         self.socket.bind(('localhost', address))
+        self.socket.settimeout(2)
         print('socket connected to the address {}'.format(address))
 
     def begin_listen(self):
