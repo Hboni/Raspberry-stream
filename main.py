@@ -10,6 +10,5 @@ if choice == 's':
 
 elif choice == 'c':
     client = Client(port)
-    mess = input("Which message to send to the server ? :\n")
     # client.send_message(mess)
     client.chat_with_server()
