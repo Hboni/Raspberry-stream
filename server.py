@@ -19,12 +19,12 @@ class Server:
         print("{} connected".format(address))
 
         response = ""
-        while not response:
-            response = client.recv(1024)
+        while not response == "fin":
+            response = client.recv(1024).decode()
             if response:
-                print(response.decode())
-                client.send("Hey".encode())
+                print(response)
 
+        client.send("Bye".encode())
         print("Close")
         client.close()
         self.socket.close()
