@@ -2,6 +2,16 @@ import socket
 
 
 class Client:
+    """
+    Create a client socket that link to a certain port, and communicate with the server.
+
+    The aim of this Client is to connect to a server through a port.
+    After correctly connected, you can send messages/data to the server using the
+    chat_with_server function, that can send several messages.
+
+    To stop the client, send the message "fin"
+
+    """
 
     def __init__(self, address):
         self.hote = "localhost"

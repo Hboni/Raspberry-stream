@@ -2,6 +2,14 @@ import socket
 
 
 class Server:
+    """
+    Create a server that prints what it received
+
+    You can link a server to a certain port on localhost.
+    Each time the server receives data, it decode it into a string and print it.
+
+    To stop the server, use a Client to send a message "fin"
+    """
 
     def __init__(self, address):
 
