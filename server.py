@@ -1,4 +1,5 @@
 import socket
+import os
 
 
 class Server:
@@ -11,13 +12,13 @@ class Server:
     To stop the server, use a Client to send a message "fin"
     """
 
-    def __init__(self, address):
+    def __init__(self, address, host="localhost"):
 
         # AF_INET is the type of protocol used (AF_UNIX/AF_INET/AF_INET6)
         # SOCK_STREAM is the socket type
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-        self.socket.bind(('localhost', address))
+        self.socket.bind((host, address))
         self.socket.settimeout(2)
         print('socket connected to the address {}'.format(address))
 

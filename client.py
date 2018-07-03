@@ -13,12 +13,12 @@ class Client:
 
     """
 
-    def __init__(self, address):
-        self.hote = "localhost"
+    def __init__(self, address, host="localhost"):
+        self.host = host
         self.port = address
 
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.socket.connect((self.hote, self.port))
+        self.socket.connect((self.host, self.port))
         #self.socket.setblocking(0)
         self.socket.settimeout(2)
         print("Connection on {}".format(self.port))
