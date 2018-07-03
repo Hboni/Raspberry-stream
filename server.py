@@ -41,7 +41,12 @@ class Server:
             except socket.timeout:
                 pass
 
-            if response:
+            if response[:4] == "open":
+                site = response.split(' ')[0]
+                command = "chromium-browser -app="
+                command += site
+                os.system(command)
+            elif response:
                 print(response)
 
         client.send("Bye".encode())
