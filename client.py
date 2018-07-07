@@ -15,7 +15,7 @@ class Client:
 
     def __init__(self, port, host="localhost"):
         self.host = host
-        self.port = port
+        self.port = int(port)
 
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.socket.connect((self.host, self.port))
