@@ -1,10 +1,12 @@
 from PyQt4 import  QtCore, QtGui
+from client import Client
 
 class ClientUI(QtGui.QWidget):
 
     def __init__(self):
 
         super(ClientUI, self).__init__()
+
         self.setupUI()
         self.setupEvents()
 
@@ -68,8 +70,26 @@ class ClientUI(QtGui.QWidget):
         self.main_layout.addLayout(self.button_layout)
 
     def setupEvents(self):
+        self.connect_button.clicked.connect(self.connect_client)
         self.cancel_button.clicked.connect(self.close)
 
+
+    def connect_client(self):
+        print('connect')
+        if self.connect_button.text() == 'Connect':
+            address = self.address_lineedit.text()
+            port = self.port_lineedit.text()
+            try:
+                self.client = Client(port, address)
+                self.state_label.setText('Connected')
+                self.connect_button.setText('Disconnect')
+            except:
+                pass
+
+        elif self.connect_button.text() == 'Disconnect':
+            self.client.send_message('fin')
+            self.state_label.setText('Not connected')
+            self.connect_button.setText('Connect')
 
 if __name__ == '__main__':
     import sys
