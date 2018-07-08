@@ -44,14 +44,16 @@ class ClientUI(QtGui.QWidget):
         self.address_layout = QtGui.QHBoxLayout()
         self.address_label = QtGui.QLabel("Address : ")
         self.address_lineedit = QtGui.QLineEdit()
+        self.address_button = QtGui.QPushButton("local")
         self.param_layout.addWidget(self.address_label, 0, 0)
-        self.param_layout.addWidget(self.address_lineedit, 0, 1)
+        self.param_layout.addWidget(self.address_lineedit, 0, 1, 1, 3)
+        self.param_layout.addWidget(self.address_button, 0, 4, 1, 1)
 
         self.port_layout = QtGui.QHBoxLayout()
         self.port_label = QtGui.QLabel("Port : ")
         self.port_lineedit = QtGui.QLineEdit()
         self.param_layout.addWidget(self.port_label, 1, 0)
-        self.param_layout.addWidget(self.port_lineedit, 1, 1)
+        self.param_layout.addWidget(self.port_lineedit, 1, 1, 1, 4)
 
         self.param_box.setLayout(self.param_layout)
         self.main_layout.addWidget(self.param_box)
@@ -65,6 +67,14 @@ class ClientUI(QtGui.QWidget):
         self.input_box.setLayout(self.input_layout)
         self.main_layout.addWidget(self.input_box)
 
+        self.comment_layout = QtGui.QVBoxLayout()
+        self.comment_label = QtGui.QLabel('')
+        comment_font = QtGui.QFont()
+        comment_font.setItalic(True)
+        self.comment_label.setFont(comment_font)
+        self.comment_layout.addWidget(self.comment_label)
+        self.main_layout.addLayout(self.comment_layout)
+
         self.button_layout = QtGui.QHBoxLayout()
         self.connect_button = QtGui.QPushButton("Connect")
         self.button_layout.addWidget(self.connect_button)
@@ -77,8 +87,11 @@ class ClientUI(QtGui.QWidget):
 
     def setupEvents(self):
         self.connect_button.clicked.connect(self.connect_client)
+        self.address_button.clicked.connect(self.local_address)
         self.cancel_button.clicked.connect(self.close)
 
+    def local_address(self):
+        self.address_lineedit.setText('localhost')
 
     def connect_client(self):
         print('connect')
