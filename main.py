@@ -15,6 +15,7 @@ if choice == 's':
 elif choice == 'c':
     if host:
         client = Client(port, host)
+        client.connect()
     else:
         client = Client(port)
     # client.send_message(mess)

@@ -18,6 +18,8 @@ class Client:
         self.port = int(port)
 
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+    def connect(self):
         self.socket.connect((self.host, self.port))
         #self.socket.setblocking(0)
         self.socket.settimeout(2)

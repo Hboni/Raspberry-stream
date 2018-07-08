@@ -83,19 +83,47 @@ class ClientUI(QtGui.QWidget):
     def connect_client(self):
         print('connect')
         if self.connect_button.text() == 'Connect':
-            address = self.address_lineedit.text()
-            port = self.port_lineedit.text()
-            try:
-                self.client = Client(port, address)
-                self.state_label.setText('Connected')
-                self.connect_button.setText('Disconnect')
-            except:
-                pass
+            param = self.check_param()
+            print('param : ', param)
+            if param:
+                address = self.address_lineedit.text()
+                port = self.port_lineedit.text()
+                try:
+                    self.client = Client(port, address)
+                    self.client.connect()
+                    self.state_label.setText('Connected')
+                    self.connect_button.setText('Disconnect')
+                    self._print_comment('')
+                except:
+                    self._print_comment("Error connecting")
+                    pass
 
         elif self.connect_button.text() == 'Disconnect':
             self.client.send_message('fin')
             self.state_label.setText('Not connected')
             self.connect_button.setText('Connect')
+
+    def _print_comment(self, message):
+        self.comment_label.setText(message)
+
+    def check_param(self):
+
+        address = self.address_lineedit.text().split('.')
+        if address != ['localhost']:
+            if len(address) != 4:
+                self._print_comment("Address parameter incorrect.")
+                return 0
+
+            for add in address:
+                if not add.isnumeric():
+                    self._print_comment("Address parameter incorrect.")
+                    return 0
+
+        if not self.port_lineedit.text().isnumeric():
+            self._print_comment("Port parameter incorrect.")
+            return 0
+
+        return 1
 
 if __name__ == '__main__':
     import sys
