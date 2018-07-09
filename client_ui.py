@@ -97,6 +97,7 @@ class ClientUI(QtGui.QWidget):
     def setupEvents(self):
         self.connect_button.clicked.connect(self.connect_client)
         self.address_button.clicked.connect(self.local_address)
+        self.send_button.clicked.connect(self.send_address)
         self.cancel_button.clicked.connect(self.close)
 
     def local_address(self):
@@ -105,7 +106,7 @@ class ClientUI(QtGui.QWidget):
     def connect_client(self):
         print('connect')
         if self.connect_button.text() == 'Connect':
-            param = self.check_param()
+            param = self._check_param()
             print('param : ', param)
             if param:
                 address = self.address_lineedit.text()
@@ -117,7 +118,7 @@ class ClientUI(QtGui.QWidget):
                     self.connect_button.setText('Disconnect')
                     self._print_comment('')
                 except:
-                    self._print_comment("Error connecting")
+                    self._print_comment("<font color='red'>Error connecting</font>")
                     pass
 
         elif self.connect_button.text() == 'Disconnect':
@@ -129,24 +130,28 @@ class ClientUI(QtGui.QWidget):
         self.comment2_label.setText(self.comment1_label.text())
         self.comment1_label.setText(message)
 
-    def check_param(self):
+    def _check_param(self):
 
         address = self.address_lineedit.text().split('.')
         if address != ['localhost']:
             if len(address) != 4:
-                self._print_comment("Address parameter incorrect.")
+                self._print_comment("<font color='red'>Address parameter incorrect.</font>")
                 return 0
 
             for add in address:
                 if not add.isnumeric():
-                    self._print_comment("Address parameter incorrect.")
+                    self._print_comment("<font color='red'>Address parameter incorrect.</font>")
                     return 0
 
         if not self.port_lineedit.text().isnumeric():
-            self._print_comment("Port parameter incorrect.")
+            self._print_comment("<font color='red'>Port parameter incorrect.</font>")
             return 0
 
         return 1
+
+    def send_address(self):
+        if self.state_label.text() == "Not connected":
+            self._print_comment("<font color='red'>Can't send %s because not connected to Server</font>" % self.input_link_lineedit.text())
 
 if __name__ == '__main__':
     import sys
