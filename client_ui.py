@@ -73,12 +73,16 @@ class ClientUI(QtGui.QWidget):
         ## Comments box
         self.comment_box = QtGui.QGroupBox("Outputs")
         self.comment_layout = QtGui.QVBoxLayout()
-        self.comment_label = QtGui.QLabel('')
+        self.comment1_label = QtGui.QLabel('')
+        self.comment2_label = QtGui.QLabel('')
         comment_font = QtGui.QFont()
         comment_font.setItalic(True)
-        self.comment_label.setFont(comment_font)
-        self.comment_layout.addWidget(self.comment_label)
-        self.main_layout.addLayout(self.comment_layout)
+        self.comment1_label.setFont(comment_font)
+        self.comment2_label.setFont(comment_font)
+        self.comment_layout.addWidget(self.comment1_label)
+        self.comment_layout.addWidget(self.comment2_label)
+        self.comment_box.setLayout(self.comment_layout)
+        self.main_layout.addWidget(self.comment_box)
 
         self.button_layout = QtGui.QHBoxLayout()
         self.connect_button = QtGui.QPushButton("Connect")
@@ -122,7 +126,8 @@ class ClientUI(QtGui.QWidget):
             self.connect_button.setText('Connect')
 
     def _print_comment(self, message):
-        self.comment_label.setText(message)
+        self.comment2_label.setText(self.comment1_label.text())
+        self.comment1_label.setText(message)
 
     def check_param(self):
 
