@@ -14,6 +14,7 @@ class ClientUI(QtGui.QWidget):
 
         self.main_layout = QtGui.QVBoxLayout(self)
 
+        ## Title
         self.title_layout = QtGui.QHBoxLayout()
         self.raspberry_picture = QtGui.QPixmap('pictures/raspberry.png')
         self.raspberry_picture = self.raspberry_picture.scaledToHeight(60)
@@ -28,6 +29,7 @@ class ClientUI(QtGui.QWidget):
         self.title_label.setFont(title_font)
         self.title_layout.addWidget(self.title_label)
 
+        # State box
         self.state_box = QtGui.QGroupBox()
         self.state_layout = QtGui.QHBoxLayout()
         self.state_label = QtGui.QLabel("Not connected")
@@ -58,6 +60,7 @@ class ClientUI(QtGui.QWidget):
         self.param_box.setLayout(self.param_layout)
         self.main_layout.addWidget(self.param_box)
 
+        # Address inputs
         self.input_box = QtGui.QGroupBox("Inputs")
         self.input_layout = QtGui.QHBoxLayout()
         self.input_link_label = QtGui.QLabel("Stream address : ")
@@ -67,6 +70,8 @@ class ClientUI(QtGui.QWidget):
         self.input_box.setLayout(self.input_layout)
         self.main_layout.addWidget(self.input_box)
 
+        ## Comments box
+        self.comment_box = QtGui.QGroupBox("Outputs")
         self.comment_layout = QtGui.QVBoxLayout()
         self.comment_label = QtGui.QLabel('')
         comment_font = QtGui.QFont()
