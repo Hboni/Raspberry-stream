@@ -15,6 +15,7 @@ class ClientUI(QtGui.QWidget):
         self.main_layout = QtGui.QVBoxLayout(self)
 
         ## Title
+        # Raspberry picture
         self.title_layout = QtGui.QHBoxLayout()
         self.raspberry_picture = QtGui.QPixmap('pictures/raspberry.png')
         self.raspberry_picture = self.raspberry_picture.scaledToHeight(60)
@@ -22,6 +23,7 @@ class ClientUI(QtGui.QWidget):
         self.raspberry_label.setPixmap(self.raspberry_picture)
         self.title_layout.addWidget(self.raspberry_label)
 
+        # App title
         self.title_label = QtGui.QLabel("Raspberry-stream client")
         title_font = QtGui.QFont()
         title_font.setBold(True)

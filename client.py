@@ -20,12 +20,21 @@ class Client:
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     def connect(self):
-        self.socket.connect((self.host, self.port))
-        #self.socket.setblocking(0)
-        self.socket.settimeout(2)
-        print("Connection on {}".format(self.port))
+        """
+        Trying to connect to self.host : self.port
+        """
+        try:
+            self.socket.connect((self.host, self.port))
+            #self.socket.setblocking(0)
+            self.socket.settimeout(2)
+            print("Connection on {}".format(self.port))
+        except:
+            print("Connection to {} failed".format(self.host))
 
     def send_message(self, message):
+        """
+        Send a message to the connected server
+        """
         self.socket.send(message.encode())
 
         response = ""
@@ -38,6 +47,9 @@ class Client:
 
 
     def chat_with_server(self):
+        """
+        Chat with server by allow to send several messages
+        """
         mess = input("Which message to send to the server : \n")
 
         server_response = ""
