@@ -50,6 +50,11 @@ class Client:
         """
         Chat with server by allow to send several messages
         """
+        try:
+            self.socket.send('test'.encode())
+        except:
+            print("No connection to a server.")
+            return 0
         mess = input("Which message to send to the server : \n")
 
         server_response = ""
