@@ -32,6 +32,13 @@ class ClientUI(QtGui.QWidget):
         # State box
         self.state_box = QtGui.QGroupBox()
         self.state_layout = QtGui.QHBoxLayout()
+        self.state_circle_red_picture = QtGui.QPixmap('pictures/red_button.png')
+        self.state_circle_red_picture = self.state_circle_red_picture.scaledToHeight(20)
+        self.state_circle_green_picture = QtGui.QPixmap('pictures/green_button.png')
+        self.state_circle_green_picture = self.state_circle_green_picture.scaledToHeight(20)
+        self.state_circle_label = QtGui.QLabel()
+        self.state_circle_label.setPixmap(self.state_circle_red_picture)
+        self.state_layout.addWidget(self.state_circle_label)
         self.state_label = QtGui.QLabel("Not connected")
         self.state_layout.addWidget(self.state_label)
         self.state_box.setLayout(self.state_layout)
@@ -117,14 +124,20 @@ class ClientUI(QtGui.QWidget):
                     self.state_label.setText('Connected')
                     self.connect_button.setText('Disconnect')
                     self._print_comment('')
+                    self.state_circle_label.setPixmap(self.state_circle_green_picture)
                 except:
                     self._print_comment("<font color='red'>Error connecting</font>")
                     pass
 
         elif self.connect_button.text() == 'Disconnect':
-            self.client.send_message('fin')
-            self.state_label.setText('Not connected')
-            self.connect_button.setText('Connect')
+            try:
+                self.client.send_message('fin')
+                self.state_label.setText('Not connected')
+                self.connect_button.setText('Connect')
+                self.state_circle_label.setPixmap(self.state_circle_red_picture)
+                self._print_comment('Disconnected!')
+            except:
+                pass
 
     def _print_comment(self, message):
         self.comment2_label.setText(self.comment1_label.text())
