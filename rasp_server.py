@@ -25,9 +25,9 @@ timeout = args.pop('timeout')
 socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 try:
     socket.bind((address, port))
-    print('Server bind to {}:{}'.format((address, port)))
+    print('Server bind to {}:{}'.format(address, port))
 except:
-    print('Server not able to bind to {}:{}'.format((address, port)))
+    print('Server not able to bind to {}:{}'.format(address, port))
 
 if timeout:
     socket.settimeout(timeout)
