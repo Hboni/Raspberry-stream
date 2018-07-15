@@ -111,6 +111,7 @@ class ClientUI(QtGui.QWidget):
         self.address_button.clicked.connect(self.local_address)
         self.send_button.clicked.connect(self.send_address)
         self.cancel_button.clicked.connect(self.close)
+        self.input_help_button.clicked.connect(self._help_button_clicked)
 
     def local_address(self):
         self.address_lineedit.setText('localhost')
@@ -167,11 +168,27 @@ class ClientUI(QtGui.QWidget):
 
         return 1
 
+    def _help_button_clicked(self):
+        self.help_window = help_input(self)
+        self.help_window.show()
+
     def send_address(self):
         if self.state_label.text() == "Not connected":
             self._print_comment("<font color='red'>Can't send %s because not connected to Server</font>" % self.input_link_lineedit.text())
         else:
             self.client.send_message(self.address_lineedit.text())
+
+class help_input(QtGui.QMainWindow):
+    def __init__(self, parent=None):
+        super(help_input, self).__init__(parent)
+
+        self.title_label = QtGui.QLabel("Input paramters")
+        self.title_label.setAlignment(QtCore.Qt.AlignCenter)
+        title_font = QtGui.QFont()
+        title_font.setBold(True)
+        title_font.setPointSize(20)
+        self.title_label.setFont(title_font)
+        self.setCentralWidget(self.title_label)
 
 if __name__ == '__main__':
     import sys
