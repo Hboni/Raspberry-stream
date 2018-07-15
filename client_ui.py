@@ -76,6 +76,9 @@ class ClientUI(QtGui.QWidget):
         self.input_layout.addWidget(self.input_link_label)
         self.input_link_lineedit = QtGui.QLineEdit()
         self.input_layout.addWidget(self.input_link_lineedit)
+        self.input_help_button = QtGui.QPushButton("?")
+        self.input_help_button.setFixedWidth(20)
+        self.input_layout.addWidget(self.input_help_button)
         self.input_box.setLayout(self.input_layout)
         self.main_layout.addWidget(self.input_box)
 
