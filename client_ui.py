@@ -197,14 +197,18 @@ class help_input(QtGui.QMainWindow):
 
         import json
         help_data = json.load(open('help.json'))[language]
-        print(help_data)
+        key_font = QtGui.QFont()
+        key_font.setBold(True)
         self.help_box = QtGui.QGroupBox('')
         self.help_layout = QtGui.QGridLayout()
+        idx = 0
         for k in help_data.keys():
             key = QtGui.QLabel(k)
+            key.setFont(key_font)
             info = QtGui.QLabel(help_data[k])
-            self.help_layout.addWidget(key, 0, 0)
-            self.help_layout.addWidget(info, 0, 1)
+            self.help_layout.addWidget(key, idx, 0)
+            self.help_layout.addWidget(info, idx, 1)
+            idx += 1
         self.help_box.setLayout(self.help_layout)
         self.main_layout.addWidget(self.help_box)
 
