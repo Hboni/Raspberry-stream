@@ -7,6 +7,8 @@ class ClientUI(QtGui.QWidget):
 
         super(ClientUI, self).__init__()
 
+        self.language = 'en'
+
         self.setupUI()
         self.setupEvents()
 
@@ -169,7 +171,7 @@ class ClientUI(QtGui.QWidget):
         return 1
 
     def _help_button_clicked(self):
-        self.help_window = help_input(self)
+        self.help_window = help_input(self, language=self.language)
         self.help_window.show()
 
     def send_address(self):
@@ -179,8 +181,11 @@ class ClientUI(QtGui.QWidget):
             self.client.send_message(self.address_lineedit.text())
 
 class help_input(QtGui.QMainWindow):
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, language='en'):
         super(help_input, self).__init__(parent)
+
+        self.main_widget = QtGui.QWidget()
+        self.main_layout = QtGui.QVBoxLayout()
 
         self.title_label = QtGui.QLabel("Input paramters")
         self.title_label.setAlignment(QtCore.Qt.AlignCenter)
@@ -188,7 +193,25 @@ class help_input(QtGui.QMainWindow):
         title_font.setBold(True)
         title_font.setPointSize(20)
         self.title_label.setFont(title_font)
-        self.setCentralWidget(self.title_label)
+        self.main_layout.addWidget(self.title_label)
+
+        import json
+        help_data = json.load(open('help.json'))[language]
+        print(help_data)
+        self.help_box = QtGui.QGroupBox('')
+        self.help_layout = QtGui.QGridLayout()
+        for k in help_data.keys():
+            key = QtGui.QLabel(k)
+            info = QtGui.QLabel(help_data[k])
+            self.help_layout.addWidget(key, 0, 0)
+            self.help_layout.addWidget(info, 0, 1)
+        self.help_box.setLayout(self.help_layout)
+        self.main_layout.addWidget(self.help_box)
+
+        self.main_widget.setLayout(self.main_layout)
+        self.setCentralWidget(self.main_widget)
+
+
 
 if __name__ == '__main__':
     import sys
