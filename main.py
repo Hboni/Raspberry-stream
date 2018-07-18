@@ -3,7 +3,7 @@ from client import Client
 
 choice = input("Server [s] or Client [c] ? ")
 host = input("Which server address ? ")
-port = input("Which port to use ? ")
+port = int(input("Which port to use ? "))
 
 if not port:
     port = 14142
