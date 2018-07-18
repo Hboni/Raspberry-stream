@@ -42,7 +42,7 @@ class Server:
                 pass
 
             if response[:4] == "open":
-                site = response.split(' ')[0]
+                site = response.split(' ')[1]
                 command = "xdg-open "
                 command += site
                 os.system(command)
