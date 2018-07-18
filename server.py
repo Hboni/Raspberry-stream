@@ -43,7 +43,7 @@ class Server:
 
             if response[:4] == "open":
                 site = response.split(' ')[0]
-                command = "chromium-browser -app="
+                command = "xdg-open "
                 command += site
                 os.system(command)
             elif response:
