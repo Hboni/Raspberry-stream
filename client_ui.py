@@ -178,7 +178,7 @@ class ClientUI(QtGui.QWidget):
         if self.state_label.text() == "Not connected":
             self._print_comment("<font color='red'>Can't send %s because not connected to Server</font>" % self.input_link_lineedit.text())
         else:
-            self.client.send_message(self.address_lineedit.text())
+            self.client.send_message(self.input_link_lineedit.text())
 
 class help_input(QtGui.QMainWindow):
     def __init__(self, parent=None, language='en'):
