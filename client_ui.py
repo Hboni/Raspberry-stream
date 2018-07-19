@@ -171,7 +171,7 @@ class ClientUI(QtGui.QWidget):
         return 1
 
     def _help_button_clicked(self):
-        self.help_window = help_input(self, language=self.language)
+        self.help_window = Help_input(self, language=self.language)
         self.help_window.show()
 
     def send_address(self):
@@ -180,9 +180,9 @@ class ClientUI(QtGui.QWidget):
         else:
             self.client.send_message(self.input_link_lineedit.text())
 
-class help_input(QtGui.QMainWindow):
+class Help_input(QtGui.QMainWindow):
     def __init__(self, parent=None, language='en'):
-        super(help_input, self).__init__(parent)
+        super(Help_input, self).__init__(parent)
 
         self.main_widget = QtGui.QWidget()
         self.main_layout = QtGui.QVBoxLayout()
