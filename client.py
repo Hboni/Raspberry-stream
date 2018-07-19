@@ -45,6 +45,13 @@ class Client:
         print("Close")
         self.socket.close()
 
+    def test_connection(self):
+        self.send_message("TEST_CO")
+        response = self.socket.recv(64)
+        if response.decode() == "1":
+            return True
+        else:
+            return False
 
     def chat_with_server(self):
         """

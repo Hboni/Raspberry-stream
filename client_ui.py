@@ -57,7 +57,7 @@ class ClientUI(QtGui.QWidget):
         self.address_layout = QtGui.QHBoxLayout()
         self.address_label = QtGui.QLabel("Address : ")
         self.address_lineedit = QtGui.QLineEdit()
-        self.address_button = QtGui.QPushButton("local")
+        self.address_button = QtGui.QPushButton("local") #192.168.0.41
         self.param_layout.addWidget(self.address_label, 0, 0)
         self.param_layout.addWidget(self.address_lineedit, 0, 1, 1, 3)
         self.param_layout.addWidget(self.address_button, 0, 4, 1, 1)
@@ -133,6 +133,9 @@ class ClientUI(QtGui.QWidget):
                     self.connect_button.setText('Disconnect')
                     self._print_comment('Connected to %s' % self.address_lineedit.text())
                     self.state_circle_label.setPixmap(self.state_circle_green_picture)
+
+                    self.check_thread = CheckThread(self.client)
+                    self.check_thread.start()
                 except:
                     self._print_comment("<font color='red'>Error connecting</font>")
                     pass
@@ -217,13 +220,20 @@ class Help_input(QtGui.QMainWindow):
 
 class CheckThread(QtCore.QThread):
 
-    def __init__(self):
+    def __init__(self, client):
         QtCore.QThread.__init__(self)
+        self.client = client
 
     def __del__(self):
         self.wait()
 
     def run(self):
+        self.sleep(5)
+        if self.client.test_connection():
+            pass
+        else:
+            print('NOT CONNECTED')
+
         pass
         # Check
 

@@ -46,6 +46,8 @@ class Server:
                 command = "xdg-open "
                 command += site
                 os.system(command)
+            elif response == 'TEST_CO':
+                client.send("1".encode())
             elif response:
                 print(response)
 
