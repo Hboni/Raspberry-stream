@@ -131,7 +131,7 @@ class ClientUI(QtGui.QWidget):
                     self.client.connect()
                     self.state_label.setText('Connected')
                     self.connect_button.setText('Disconnect')
-                    self._print_comment('')
+                    self._print_comment('Connected to %s' % self.address_lineedit.text())
                     self.state_circle_label.setPixmap(self.state_circle_green_picture)
                 except:
                     self._print_comment("<font color='red'>Error connecting</font>")
