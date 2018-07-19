@@ -215,7 +215,17 @@ class Help_input(QtGui.QMainWindow):
         self.main_widget.setLayout(self.main_layout)
         self.setCentralWidget(self.main_widget)
 
+class CheckThread(QtCore.QThread):
 
+    def __init__(self):
+        QtCore.QThread.__init__(self)
+
+    def __del__(self):
+        self.wait()
+
+    def run(self):
+        pass
+        # Check
 
 if __name__ == '__main__':
     import sys
