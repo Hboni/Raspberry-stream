@@ -228,11 +228,14 @@ class CheckThread(QtCore.QThread):
         self.wait()
 
     def run(self):
-        self.sleep(5)
-        if self.client.test_connection():
-            pass
-        else:
-            print('NOT CONNECTED')
+        connected = True
+        while connected:
+            self.sleep(5)
+            if self.client.test_connection():
+                pass
+            else:
+                print('NOT CONNECTED')
+                connected = False
 
         pass
         # Check

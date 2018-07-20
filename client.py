@@ -41,14 +41,14 @@ class Client:
         while not response:
             response = self.socket.recv(1024)
             print(response.decode())
+            return response.decode()
 
-        print("Close")
-        self.socket.close()
+        # print("Close")
+        # self.socket.close()
 
     def test_connection(self):
-        self.send_message("TEST_CO")
-        response = self.socket.recv(64)
-        if response.decode() == "1":
+        response = self.send_message("TEST_CO")
+        if response == "1":
             return True
         else:
             return False

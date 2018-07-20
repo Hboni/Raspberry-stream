@@ -19,4 +19,5 @@ elif choice == 'c':
     else:
         client = Client(port)
     # client.send_message(mess)
-    client.chat_with_server()
+    client.test_connection()
+    # client.chat_with_server()
