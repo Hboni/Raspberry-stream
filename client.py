@@ -78,6 +78,8 @@ class Client:
 
         server_response = self.socket.recv(1024)
         print(server_response.decode())
+
+    def close(self):
         print("Close")
         self.socket.close()
 
