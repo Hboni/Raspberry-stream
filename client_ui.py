@@ -237,6 +237,7 @@ class CheckThread(QtCore.QThread):
                 print('NOT CONNECTED')
                 connected = False
 
+        self.client.close()
         pass
         # Check
 
