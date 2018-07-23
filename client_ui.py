@@ -76,6 +76,9 @@ class ClientUI(QtGui.QWidget):
         self.input_layout = QtGui.QHBoxLayout()
         self.input_link_label = QtGui.QLabel("Stream address : ")
         self.input_layout.addWidget(self.input_link_label)
+        self.input_category = QtGui.QComboBox()
+        self.input_category.addItems(['test', 'open'])
+        self.input_layout.addWidget(self.input_category)
         self.input_link_lineedit = QtGui.QLineEdit()
         self.input_layout.addWidget(self.input_link_lineedit)
         self.input_help_button = QtGui.QPushButton("?")
@@ -181,7 +184,7 @@ class ClientUI(QtGui.QWidget):
         if self.state_label.text() == "Not connected":
             self._print_comment("<font color='red'>Can't send %s because not connected to Server</font>" % self.input_link_lineedit.text())
         else:
-            self.client.send_message(self.input_link_lineedit.text())
+            self.client.send_message(self.input_category.text()+' '+self.input_link_lineedit.text())
 
 class Help_input(QtGui.QMainWindow):
     def __init__(self, parent=None, language='en'):
