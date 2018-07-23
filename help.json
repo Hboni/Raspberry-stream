@@ -1,4 +1,5 @@
 {"en":
-    {"open": "To launch a web service, add the key world 'open' in front of your address.",
+    {"": "To use this UI, after connect to a server (from Raspberry-stream) by using address and port, in input add the address of the site that you want to see.",
+        "open": "To launch a web service, add the key world 'open' in front of your address.",
         "test": "If you just want to test the connection, write 'Test'."}
 }
