@@ -45,6 +45,7 @@ class Server:
                 site = response.split(' ')[1]
                 command = "xdg-open "
                 command += site
+                client.send("Try to open {}".format(site).encode())
                 os.system(command)
             elif response == 'TEST_CO':
                 client.send("1".encode())
