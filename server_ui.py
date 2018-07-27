@@ -10,9 +10,13 @@ class ServerUI(QtGui.QWidget):
 
     def setupUI(self):
 
-        self.main_layout = QtGui.QVBoxLayout()
+        self.main_layout = QtGui.QVBoxLayout(self)
 
         self.head_layout = QtGui.QHBoxLayout()
+        self.head_label = QtGui.QLabel("Raspberry-stream : Server")
+        self.head_layout.addWidget(self.head_label)
+
+        self.main_layout.addLayout(self.head_layout)
 
 
 if __name__ == '__main__':
